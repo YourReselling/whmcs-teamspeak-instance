@@ -1,0 +1,785 @@
+{
+  "teamspeak_instance": {
+    "slug": "teamspeak_instance",
+    "create": {
+      "method": "POST",
+      "path": "/products/teamspeak/instances/create",
+      "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:283",
+      "required_fields": [
+        "name"
+      ],
+      "response_id_path": "data.id",
+      "body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Instance name (max 255 characters)",
+            "example": "Meine TS3 Instanz",
+            "maxLength": 255,
+            "x-validation": [
+              "required",
+              "string",
+              "max:255"
+            ],
+            "x-validation-expressions": []
+          }
+        },
+        "additionalProperties": true,
+        "required": [
+          "name"
+        ]
+      },
+      "bodyRequired": true,
+      "pathParameters": [],
+      "query": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "permissions": [
+        "teamspeak:create"
+      ],
+      "responseMode": "json"
+    },
+    "termination": {
+      "method": "POST",
+      "path": "/products/teamspeak/instances/{instance}/terminate",
+      "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:532",
+      "semantics": "terminate TeamSpeak instance",
+      "body": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "bodyRequired": false,
+      "pathParameters": [
+        {
+          "name": "instance",
+          "type": "string",
+          "description": "Instance ID"
+        }
+      ],
+      "query": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "permissions": [
+        "teamspeak:delete"
+      ],
+      "responseMode": "json"
+    },
+    "suspend": null,
+    "unsuspend": null,
+    "notes": [
+      "No suspend/unsuspend endpoint; stop/start are power operations"
+    ],
+    "displayName": "TeamSpeak Instanz",
+    "module": "yourresellingteamspeakinstance",
+    "show": {
+      "id": "GET /products/teamspeak/instances/{instance}",
+      "group": "teamspeak",
+      "name": "instancesShow",
+      "method": "GET",
+      "path": "/products/teamspeak/instances/{instance}",
+      "summary": "Show TeamSpeak instance details",
+      "description": "Returns detailed information about a specific TeamSpeak instance including connection credentials.",
+      "germanSummary": "TeamSpeak-Instanz Details anzeigen",
+      "permissions": [
+        "teamspeak:read"
+      ],
+      "authenticated": true,
+      "pathParameters": [
+        {
+          "name": "instance",
+          "type": "string",
+          "description": "Instance ID"
+        }
+      ],
+      "query": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "body": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": true
+      },
+      "bodyRequired": false,
+      "requestContentType": "application/json",
+      "responseMode": "json",
+      "responses": [
+        {
+          "status": 200,
+          "description": "Instance details",
+          "germanDescription": "Instanz-Details",
+          "schema": null,
+          "example": {
+            "success": true,
+            "data": {
+              "id": "550e8400-e29b-41d4-a716-446655440000",
+              "name": "Meine TS3 Instanz",
+              "status": "running",
+              "status_label": "Aktiv",
+              "current_slots": 50,
+              "average_slots": 42,
+              "ip_address": "192.168.1.1",
+              "price_name": "TeamSpeak Instanz",
+              "last_crawled_at": "2025-01-15T10:30:00+00:00",
+              "created_at": "2025-01-01T00:00:00+00:00",
+              "query_port": 10011,
+              "username": "serveradmin",
+              "password": "abc123xyz",
+              "port_range_from": 9987,
+              "port_range_to": 10087,
+              "error_message": null,
+              "admin_lock_reason": null
+            }
+          },
+          "contentType": "application/json"
+        },
+        {
+          "status": 404,
+          "description": "Instance not found",
+          "germanDescription": "Instanz nicht gefunden",
+          "schema": null,
+          "example": null,
+          "contentType": "application/json"
+        }
+      ],
+      "deprecated": false,
+      "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:118",
+      "routeName": "api.teamspeak.instances.show"
+    },
+    "showDataPath": "data",
+    "activeStatuses": [
+      "running"
+    ],
+    "views": {
+      "instancesShow": {
+        "id": "GET /products/teamspeak/instances/{instance}",
+        "group": "teamspeak",
+        "name": "instancesShow",
+        "method": "GET",
+        "path": "/products/teamspeak/instances/{instance}",
+        "summary": "Show TeamSpeak instance details",
+        "description": "Returns detailed information about a specific TeamSpeak instance including connection credentials.",
+        "germanSummary": "TeamSpeak-Instanz Details anzeigen",
+        "permissions": [
+          "teamspeak:read"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "bodyRequired": false,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "Instance details",
+            "germanDescription": "Instanz-Details",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "id": "550e8400-e29b-41d4-a716-446655440000",
+                "name": "Meine TS3 Instanz",
+                "status": "running",
+                "status_label": "Aktiv",
+                "current_slots": 50,
+                "average_slots": 42,
+                "ip_address": "192.168.1.1",
+                "price_name": "TeamSpeak Instanz",
+                "last_crawled_at": "2025-01-15T10:30:00+00:00",
+                "created_at": "2025-01-01T00:00:00+00:00",
+                "query_port": 10011,
+                "username": "serveradmin",
+                "password": "abc123xyz",
+                "port_range_from": 9987,
+                "port_range_to": 10087,
+                "error_message": null,
+                "admin_lock_reason": null
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:118",
+        "routeName": "api.teamspeak.instances.show"
+      },
+      "instancesStatistics": {
+        "id": "GET /products/teamspeak/instances/{instance}/statistics",
+        "group": "teamspeak",
+        "name": "instancesStatistics",
+        "method": "GET",
+        "path": "/products/teamspeak/instances/{instance}/statistics",
+        "summary": "Get instance statistics",
+        "description": "Returns slot usage statistics and snapshots for the last 7 days.",
+        "germanSummary": "Instanz-Statistiken abrufen",
+        "permissions": [
+          "teamspeak:read"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "bodyRequired": false,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "Statistics data",
+            "germanDescription": "Statistik-Daten",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "current_slots": 50,
+                "average_slots": 42,
+                "snapshots": [
+                  {
+                    "total_slots": 48,
+                    "virtual_server_count": 3,
+                    "recorded_at": "2025-01-15T10:00:00+00:00"
+                  },
+                  {
+                    "total_slots": 52,
+                    "virtual_server_count": 3,
+                    "recorded_at": "2025-01-15T10:05:00+00:00"
+                  }
+                ]
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:158",
+        "routeName": "api.teamspeak.instances.statistics"
+      },
+      "instancesVirtualservers": {
+        "id": "GET /products/teamspeak/instances/{instance}/virtualservers",
+        "group": "teamspeak",
+        "name": "instancesVirtualservers",
+        "method": "GET",
+        "path": "/products/teamspeak/instances/{instance}/virtualservers",
+        "summary": "Get instance virtual servers",
+        "description": "Returns the virtual servers running on the instance.",
+        "germanSummary": "Virtuelle Server der Instanz abrufen",
+        "permissions": [
+          "teamspeak:read"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "bodyRequired": false,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "Virtual servers",
+            "germanDescription": "Virtuelle Server",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "virtualservers": [
+                  {
+                    "virtualserver": "XXXXXXXXXXXXXXXXXXXXXXXXXXX=",
+                    "created_at": "2025-01-01T00:00:00+00:00"
+                  }
+                ]
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:238",
+        "routeName": "api.teamspeak.instances.virtualservers"
+      },
+      "instancesWhitelist": {
+        "id": "GET /products/teamspeak/instances/{instance}/whitelist",
+        "group": "teamspeak",
+        "name": "instancesWhitelist",
+        "method": "GET",
+        "path": "/products/teamspeak/instances/{instance}/whitelist",
+        "summary": "Get instance whitelist",
+        "description": "Returns the current IP whitelist for the instance.",
+        "germanSummary": "Instanz-Whitelist abrufen",
+        "permissions": [
+          "teamspeak:read"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "bodyRequired": false,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "Whitelist IPs",
+            "germanDescription": "Whitelist-IPs",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "whitelist": [
+                  "192.168.1.100",
+                  "10.0.0.50"
+                ]
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:203",
+        "routeName": "api.teamspeak.instances.whitelist"
+      }
+    },
+    "controls": {
+      "instancesStart": {
+        "id": "POST /products/teamspeak/instances/{instance}/start",
+        "group": "teamspeak",
+        "name": "instancesStart",
+        "method": "POST",
+        "path": "/products/teamspeak/instances/{instance}/start",
+        "summary": "Start a TeamSpeak instance",
+        "description": "Starts a stopped TeamSpeak instance.",
+        "germanSummary": "TeamSpeak-Instanz starten",
+        "permissions": [
+          "teamspeak:power"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "bodyRequired": false,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "Instance started",
+            "germanDescription": "Instanz gestartet",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "id": "550e8400-e29b-41d4-a716-446655440000",
+                "name": "Meine TS3 Instanz",
+                "status": "running",
+                "status_label": "Aktiv"
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          },
+          {
+            "status": 409,
+            "description": "Instance not in startable state",
+            "germanDescription": "Instanz nicht im startbaren Zustand",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:329",
+        "routeName": "api.teamspeak.instances.start",
+        "label": "Starten"
+      },
+      "instancesStop": {
+        "id": "POST /products/teamspeak/instances/{instance}/stop",
+        "group": "teamspeak",
+        "name": "instancesStop",
+        "method": "POST",
+        "path": "/products/teamspeak/instances/{instance}/stop",
+        "summary": "Stop a TeamSpeak instance",
+        "description": "Stops a running TeamSpeak instance.",
+        "germanSummary": "TeamSpeak-Instanz stoppen",
+        "permissions": [
+          "teamspeak:power"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "bodyRequired": false,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "Instance stopped",
+            "germanDescription": "Instanz gestoppt",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "id": "550e8400-e29b-41d4-a716-446655440000",
+                "name": "Meine TS3 Instanz",
+                "status": "stopped",
+                "status_label": "Gestoppt"
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          },
+          {
+            "status": 409,
+            "description": "Instance not running",
+            "germanDescription": "Instanz laeuft nicht",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:369",
+        "routeName": "api.teamspeak.instances.stop",
+        "label": "Stoppen"
+      },
+      "instancesWhitelistAdd": {
+        "id": "POST /products/teamspeak/instances/{instance}/whitelist/add",
+        "group": "teamspeak",
+        "name": "instancesWhitelistAdd",
+        "method": "POST",
+        "path": "/products/teamspeak/instances/{instance}/whitelist/add",
+        "summary": "Add IP to whitelist",
+        "description": "Adds an IP address to the instance whitelist.",
+        "germanSummary": "IP zur Whitelist hinzufuegen",
+        "permissions": [
+          "teamspeak:update"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "ip": {
+              "type": "string",
+              "format": "ipv4",
+              "description": "IPv4 address to whitelist",
+              "example": "192.168.1.100",
+              "x-validation": [
+                "required",
+                "ip"
+              ],
+              "x-validation-expressions": []
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "ip"
+          ]
+        },
+        "bodyRequired": true,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "IP added",
+            "germanDescription": "IP hinzugefuegt",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "message": "IP wurde zur Whitelist hinzugefuegt"
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          },
+          {
+            "status": 422,
+            "description": "Invalid IP",
+            "germanDescription": "Ungueltige IP",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:454",
+        "routeName": "api.teamspeak.instances.whitelist.add",
+        "label": "Whitelist ergänzen"
+      },
+      "instancesWhitelistRemove": {
+        "id": "POST /products/teamspeak/instances/{instance}/whitelist/remove",
+        "group": "teamspeak",
+        "name": "instancesWhitelistRemove",
+        "method": "POST",
+        "path": "/products/teamspeak/instances/{instance}/whitelist/remove",
+        "summary": "Remove IP from whitelist",
+        "description": "Removes an IP address from the instance whitelist.",
+        "germanSummary": "IP von Whitelist entfernen",
+        "permissions": [
+          "teamspeak:update"
+        ],
+        "authenticated": true,
+        "pathParameters": [
+          {
+            "name": "instance",
+            "type": "string",
+            "description": "Instance ID"
+          }
+        ],
+        "query": {
+          "type": "object",
+          "properties": {},
+          "additionalProperties": true
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "ip": {
+              "type": "string",
+              "format": "ipv4",
+              "description": "IPv4 address to remove from whitelist",
+              "example": "192.168.1.100",
+              "x-validation": [
+                "required",
+                "ip"
+              ],
+              "x-validation-expressions": []
+            }
+          },
+          "additionalProperties": true,
+          "required": [
+            "ip"
+          ]
+        },
+        "bodyRequired": true,
+        "requestContentType": "application/json",
+        "responseMode": "json",
+        "responses": [
+          {
+            "status": 200,
+            "description": "IP removed",
+            "germanDescription": "IP entfernt",
+            "schema": null,
+            "example": {
+              "success": true,
+              "data": {
+                "message": "IP wurde von der Whitelist entfernt"
+              }
+            },
+            "contentType": "application/json"
+          },
+          {
+            "status": 404,
+            "description": "Instance not found",
+            "germanDescription": "Instanz nicht gefunden",
+            "schema": null,
+            "example": null,
+            "contentType": "application/json"
+          }
+        ],
+        "deprecated": false,
+        "source": "app/Http/Controllers/Api/V1/Teamspeak/TeamspeakInstanceController.php:494",
+        "routeName": "api.teamspeak.instances.whitelist.remove",
+        "label": "Whitelist entfernen"
+      }
+    },
+    "customerFields": [
+      "name"
+    ],
+    "fields": [
+      {
+        "name": "name",
+        "path": false,
+        "required": true,
+        "label": "Name",
+        "type": "string",
+        "description": "Instance name (max 255 characters)",
+        "example": "Meine TS3 Instanz",
+        "maxLength": 255,
+        "x-validation": [
+          "required",
+          "string",
+          "max:255"
+        ],
+        "x-validation-expressions": []
+      }
+    ],
+    "configFields": [
+      {
+        "name": "name",
+        "path": false,
+        "required": true,
+        "label": "Name",
+        "type": "string",
+        "description": "Instance name (max 255 characters)",
+        "example": "Meine TS3 Instanz",
+        "maxLength": 255,
+        "x-validation": [
+          "required",
+          "string",
+          "max:255"
+        ],
+        "x-validation-expressions": []
+      }
+    ]
+  }
+}
